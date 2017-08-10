@@ -140,7 +140,9 @@ export default (styles) => {
     }
 
     componentDidMount() {
-      window.onkeydown = this.listenForClose.bind(this);
+      if (!this.props.noEscape) {
+        window.onkeydown = this.listenForClose.bind(this);
+      }
 
       // Allow initial open state to be set by props for animations with wrapper elements.
       if (this.props.isOpen) {
@@ -251,6 +253,7 @@ export default (styles) => {
     itemListClassName: PropTypes.string,
     menuClassName: PropTypes.string,
     morphShapeClassName: PropTypes.string,
+    noEscape: PropTypes.bool,
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
@@ -273,6 +276,7 @@ export default (styles) => {
     menuClassName: '',
     morphShapeClassName: '',
     noOverlay: false,
+    noEscape: false,
     onStateChange: () => {},
     outerContainerId: '',
     overlayClassName: '',
